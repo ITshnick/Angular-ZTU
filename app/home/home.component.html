@@ -1,0 +1,195 @@
+<div class="container nav-top">
+  <div class="row">
+    <nav class="navbar navbar-light bg-purple">
+      <div class="container-fluid">
+        <h1><a href="/home" class="back-main-icons">Дэшборд</a></h1>
+        <ul class="nav nav-our-control justify-content-end">
+          <li class="nav-item">
+            <a id="user-name" class="nav-link disabled" aria-current="page" href="#">{{currentUser.userName? currentUser.userName: currentUser.email}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="offcanvas" href="/home#offcanvasmenu" role="button" aria-controls="offcanvasmenu"><span class="material-icons" data-bs-toggle="offcanvas" href="/home#offcanvasmenu" role="button" aria-controls="offcanvasmenu">menu</span></a>
+          </li>
+          <li id="settings" class="nav-item">
+            <a (click)="toSettings()" class="nav-link"><span class="material-icons">settings</span></a>
+          </li>
+          <li id="logout" class="nav-item">
+            <a (click)="LogOut()" class="nav-link"><span class="material-icons">logout</span></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasmenu" aria-labelledby="offcanvasmenu">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Меню</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="row">
+      <div class="col-12 col-menu-margins">
+
+        <div *ngIf="currentUser.role === 'Администратор'" class="card h-100 card-body-menubg menu-card-control">
+          <div (click)="toAdmin()" id="admin_menu" class="card-body">
+            <h6 class="card-subtitle mb-2 text-muted">Администрация</h6>
+            <p class="card-text">Управление пользователями, API.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div *ngIf="currentUser.role === 'Администратор' || currentUser.role === 'Главный скуп-сервис'" class="col-12 col-menu-margins">
+        <a href="#">
+          <div class="card h-100 card-body-menubg menu-card-control">
+            <div (click)="toBuyup()" class="card-body">
+              <h6 class="card-subtitle mb-2 text-muted">Настройки скуп-сервиса</h6>
+              <p class="card-text">Резервирование денег, интант оплаты.</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div *ngIf="currentUser.role === 'Администратор' || currentUser.role === 'Главный скуп-сервис'" class="col-12 col-menu-margins">
+        <a href="/home">
+          <div class="card h-100 card-body-menubg menu-card-control">
+            <div class="card-body">
+              <h6 class="card-subtitle mb-2 text-muted">Логи оплат</h6>
+              <p class="card-text">Посмотреть историю оплат.</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div *ngIf="currentUser.role === 'Администратор'" class="col-12 col-menu-margins">
+        <a href="/home">
+          <div class="card h-100 card-body-menubg menu-card-control">
+            <div class="card-body">
+              <h6 class="card-subtitle mb-2 text-muted">Неподтвержденные оплаты</h6>
+              <p class="card-text">Одобрить или отклонить оплаты.</p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div *ngIf="currentUser.role === 'Администратор' ||
+                  currentUser.role === 'Главный скуп-сервис' ||
+                  currentUser.role === 'Доверенный пользователь' ||
+                  currentUser.role === 'Пользователь' ||
+                  currentUser.role === 'Бухгалтер'" class="col-12 col-menu-margins">
+          <div class="card h-100 card-body-menubg menu-card-control">
+            <div (click)="toPayment()" class="card-body">
+              <h6 class="card-subtitle mb-2 text-muted">Провести оплату</h6>
+              <p class="card-text">Механизм проведение оплаты.</p>
+            </div>
+          </div>
+      </div>
+
+      <div *ngIf="currentUser.role === 'Администратор'" class="col-12 col-menu-margins">
+<!--        <a href="#">-->
+          <div class="card h-100 card-body-menubg menu-card-control">
+            <div (click)="toToken()" class="card-body">
+              <h6 class="card-subtitle mb-2 text-muted">Токены</h6>
+              <p class="card-text">Настройки API ключей.</p>
+            </div>
+          </div>
+<!--        </a>-->
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="container nav-bread">
+  <div class="row">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">Добро-пожаловать, <span>{{currentUser.userName? currentUser.userName: currentUser.email}}</span>, это ваш Дэшборд. Чего желаете исполнить?</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
+<div class="container menucols">
+  <div class="row">
+
+    <div *ngIf="currentUser.role === 'Администратор'" class="col-12 col-sm-6 col-md-4 col-lg-3 col-menu-margins">
+        <div class="card h-100 card-body-menubg menu-card-control">
+          <div (click)="toAdmin()" id="admin" class="card-body">
+            <h5 class="card-title"><span class="material-icons">admin_panel_settings</span></h5>
+            <h6 class="card-subtitle mb-2 text-muted">Администрация</h6>
+            <p class="card-text">Управление пользователями, API.</p>
+          </div>
+        </div>
+    </div>
+
+    <div *ngIf="currentUser.role === 'Администратор' || currentUser.role === 'Главный скуп-сервис'" class="col-12 col-sm-6 col-md-4 col-lg-3 col-menu-margins">
+        <div class="card h-100 card-body-menubg menu-card-control">
+          <div (click)="toBuyup()" class="card-body">
+            <h5 class="card-title"><span class="material-icons">shopping_cart</span></h5>
+            <h6 class="card-subtitle mb-2 text-muted">Настройки скуп-сервиса</h6>
+            <p class="card-text">Резервирование денег, интант оплаты.</p>
+          </div>
+        </div>
+    </div>
+
+    <div *ngIf="currentUser.role === 'Администратор' || currentUser.role === 'Главный скуп-сервис'" class="col-12 col-sm-6 col-md-4 col-lg-3 col-menu-margins">
+      <a href="/home">
+        <div class="card h-100 card-body-menubg menu-card-control">
+          <div class="card-body">
+            <h5 class="card-title"><span class="material-icons">receipt</span></h5>
+            <h6 class="card-subtitle mb-2 text-muted">Логи оплат</h6>
+            <p class="card-text">Посмотреть историю оплат.</p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div *ngIf="currentUser.role === 'Администратор'" class="col-12 col-sm-6 col-md-4 col-lg-3 col-menu-margins">
+      <a href="/home">
+        <div class="card h-100 card-body-menubg menu-card-control">
+          <div class="card-body">
+            <h5 class="card-title"><span class="material-icons">payments</span></h5>
+            <h6 class="card-subtitle mb-2 text-muted">Неподтвержденные оплаты</h6>
+            <p class="card-text">Одобрить или отклонить оплаты.</p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div *ngIf="currentUser.role === 'Администратор' ||
+                currentUser.role === 'Главный скуп-сервис' ||
+                currentUser.role === 'Доверенный пользователь' ||
+                currentUser.role === 'Пользователь' ||
+                currentUser.role === 'Бухгалтер'" class="col-12 col-sm-6 col-md-4 col-lg-3 col-menu-margins">
+        <div class="card h-100 card-body-menubg menu-card-control">
+          <div (click)="toPayment()" class="card-body">
+            <h5 class="card-title"><span class="material-icons">price_change</span></h5>
+            <h6 class="card-subtitle mb-2 text-muted">Провести оплату</h6>
+            <p class="card-text">Механизм проведение оплаты.</p>
+          </div>
+        </div>
+    </div>
+
+    <div *ngIf="currentUser.role === 'Администратор'" class="col-12 col-sm-6 col-md-4 col-lg-3 col-menu-margins">
+
+        <div class="card h-100 card-body-menubg menu-card-control">
+          <div (click)="toToken()" class="card-body">
+            <h5 class="card-title"><span class="material-icons">api</span></h5>
+            <h6 class="card-subtitle mb-2 text-muted">Токены</h6>
+            <p class="card-text">Настройки API ключей.</p>
+          </div>
+        </div>
+
+    </div>
+
+  </div>
+</div>
+
+<style type="text/css">#hellopreloader>p{display:none;}#hellopreloader_preload{display: block;position: fixed;z-index: 99999;top: 0;left: 0;width: 100%;height: 100%;min-width: 1000px;background: #1E1E30 url(http://hello-site.ru//main/images/preloads/puff.svg) center center no-repeat;background-size:140px;}</style>
+<div id="hellopreloader">
+  <div id="hellopreloader_preload">
+  </div>
+</div>

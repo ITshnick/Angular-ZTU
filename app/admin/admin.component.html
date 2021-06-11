@@ -1,0 +1,369 @@
+<div class="container nav-top">
+  <div class="row">
+    <nav class="navbar navbar-light bg-purple">
+      <div class="container-fluid">
+        <h1><a href="/home" class="back-main-icons">Администрация</a></h1>
+        <ul class="nav nav-our-control justify-content-end">
+          <li class="nav-item">
+            <a id="user-name" class="nav-link disabled" aria-current="page">{{currentUser.userName? currentUser.userName: currentUser.email}}</a>
+          </li>
+          <li class="nav-item">
+            <a (click)="toSettings()" id="settings" class="nav-link"><span class="material-icons">settings</span></a>
+          </li>
+          <li class="nav-item">
+            <a (click)="LogOut()" id="logout" class="nav-link"><span class="material-icons">logout</span></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<div class="container nav-bread">
+  <div class="row">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a (click)="toHome()" id="toHome" href="/home">Дэшборд</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Администрация</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
+<div class="container admin-tables">
+  <div class="row">
+
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-adm-margins">
+      <div class="row align-items-end row-table-titles">
+        <div class="col-6"><h5>Список пользователей</h5></div>
+        <div class="col-6">
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button class="btn btn-outline-info btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#addUserModal">+ Новый пользователь</button>
+          </div>
+        </div>
+      </div>
+      <div class="table-amd-mobility">
+          <div class="table-responsive">
+            <table class="table align-middle table-adm-control">
+              <thead>
+                <tr>
+                  <th scope="col">E-mail <span class="material-icons material-icons-outtable">filter_list</span></th>
+                  <th scope="col">Имя <span class="material-icons material-icons-outtable">filter_list</span></th>
+                  <th scope="col">XeroID <span class="material-icons material-icons-outtable">filter_list</span></th>
+                  <th scope="col">IP <span class="material-icons material-icons-outtable">filter_list</span></th>
+                  <th scope="col">Ред.</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let user of users">
+                <tr>
+                  <th scope="row">{{user.email}}</th>
+                  <td>{{user.username}}</td>
+                  <td>{{user.name_in_xero}}</td>
+                  <td class="ip_inline">{{user.addresses}}</td>
+                  <td><a (click)="getEditUser(user.id)" class="table-link-action" href="" data-bs-toggle="modal" data-bs-target="#editUserModal"><span class="material-icons material-icons-intable">edit</span></a></td>
+                  <td><a (click)="getUser(user.id)" class="table-link-action" href="" data-bs-toggle="modal" data-bs-target="#delUserModal"><span class="material-icons material-icons-intable">delete</span></a></td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-adm-margins">
+      <div class="row align-items-end row-table-titles">
+        <div class="col-6"><h5>Список схем</h5></div>
+        <div class="col-6">
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button class="btn btn-outline-info btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#addSchemeModal">+ Добавить схему</button>
+          </div>
+        </div>
+      </div>
+      <div class="table-amd-mobility">
+          <div class="table-responsive">
+            <table class="table align-middle table-adm-control table-adm-control-scheme">
+              <thead>
+                <tr>
+                  <th scope="col">Аккаунт No. <span class="material-icons material-icons-outtable">filter_list</span></th>
+                  <th scope="col">Название схемы <span class="material-icons material-icons-outtable">filter_list</span></th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let schema of schemes">
+                <tr>
+                  <th scope="row">{{schema.account_number}}</th>
+                  <td>{{schema.name}}</td>
+                  <td><a (click)="getIdSchema(schema.id)" class="table-link-action" href="" data-bs-toggle="modal" data-bs-target="#delSchemeModal"><span  class="material-icons material-icons-intable">delete</span></a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<div class="container adm-zarplats">
+  <div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-adm-margins">
+      <div class="plus-minus-selector">
+        <h5>Список контактов</h5>
+        <div class="input-group">
+          <input type="text" class="form-control form-purple" aria-label="Search contacts">
+          <div class="input-group-text">
+            <span class="material-icons">search</span>
+          </div>
+        </div>
+        <select (change)="selectSalaryXero($event)" class="form-select form-purple" size="10" aria-label="All contacts">
+          <div *ngIf="!search_salary_xero; else unset_xero" >
+            <option *ngFor="let salary_item of search_salary_xero" value="{{salary_item.id}}">{{salary_item.name}}</option>
+          </div>
+          <ng-template #unset_xero>
+            <option *ngFor="let salary_item of salary_xero" value="{{salary_item.id}}">{{salary_item.name}}</option>
+          </ng-template>
+        </select>
+      </div>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-2 col-adm-margins">
+      <ul class="list-plusminus translate-middle-plusminus">
+        <li class="list-plusminus-item"><button (click)="createSalaryContact()" type="button" id="toRight" class="btn btn-outline-success">&#8250;</button></li>
+        <li class="list-plusminus-item"><button (click)="deleteSalaryContact()" type="button" id="toLeft"  class="btn btn-outline-danger">&#8249;</button></li>
+      </ul>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-adm-margins">
+      <div class="plus-minus-selector">
+        <h5>С зарплатами</h5>
+        <div class="input-group">
+          <input type="text" class="form-control form-purple" aria-label="Search contacts">
+          <div class="input-group-text">
+            <span class="material-icons">search</span>
+          </div>
+        </div>
+        <select (change)="selectSalaryLocal($event)" class="form-select form-purple" size="10" aria-label="All contacts">
+          <div *ngIf="!search_salary_local; else unset_local" >
+            <option *ngFor="let salary_item of search_salary_local" value="{{salary_item.id}}">{{salary_item.name}}</option>
+          </div>
+          <ng-template #unset_local>
+            <option *ngFor="let salary_item of salary_local" value="{{salary_item.id}}">{{salary_item.name}}</option>
+          </ng-template>
+        </select>
+      </div>
+    </div>
+    <!-- Messages -->
+    <div *ngIf="message_id == 'xero-message'" class="{{messager.message.status}} {{messager.message.type}} md-3 alert alert-dismissible fade">
+      <strong>{{messager.message.title}}</strong> <br><span>{{messager.message.text}}</span>
+    </div>
+    <!-- Messages -->
+  </div>
+</div>
+
+<div class="container adm-finisher">
+  <div class="row">
+    <div class="finisher-title">
+      <h5>Другие настройки</h5>
+    </div>
+    <div class="row finisher-form-controls">
+      <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-adm-margins">
+        <label for="" class="form-label">Время начала смены</label>
+        <form class="row g-3">
+            <div class="col-auto">
+              <input [(ngModel)]="START_OF_SHIFT[0].value" type="time" class="form-control time-picker-input form-purple" id="time_break_select" name="time_break_select">
+            </div>
+            <div class="col-auto">
+              <button (click)="setStartTime()" type="submit" class="btn btn-primary align-text-bottom button-purple">Подтвердить</button>
+            </div>
+        </form>
+      </div>
+    </div>
+    <!-- Messages -->
+    <div *ngIf="message_id == 'time-message'" class="{{messager.message.status}} {{messager.message.type}} md-3 alert alert-dismissible fade">
+      <strong>{{messager.message.title}}</strong> <br><span>{{messager.message.text}}</span>
+    </div>
+    <!-- Messages -->
+  </div>
+</div>
+
+<!--TODO: Set block-->
+
+<div class="modal fade" id="delSchemeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Удаление схемы</h5>
+      </div>
+      <div class="modal-body">
+        <p>Вы действительно хотите удалить аккаунт схемы из базы данных этого сайта?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Отменить</button>
+        <button (click)="deleteSchema()" type="button" class="btn btn-primary button-purple">Удалить</button>
+      </div>
+      <!-- Messages -->
+      <div *ngIf="message_id == 'schema-message'" class="{{messager.message.status}} {{messager.message.type}} md-3 mx-5 my-4 my-sm-3 my-lg-4 alert alert-dismissible fade">
+        <strong>{{messager.message.title}}</strong> <br><span>{{messager.message.text}}</span>
+      </div>
+      <!-- Messages -->
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="delUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Удаление пользователя</h5>
+      </div>
+      <div class="modal-body">
+        <p>Вы действительно хотите удалить пользователя из базы данных этого сайта?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Отменить</button>
+        <button (click)="deleteUser()" type="button" class="btn btn-primary button-purple">Удалить</button>
+      </div>
+      <!-- Messages -->
+      <div *ngIf="message_id == 'user-deleted-message'" class="{{messager.message.status}} {{messager.message.type}} md-3 mx-5 my-4 my-sm-3 my-lg-4 alert alert-dismissible fade">
+        <strong>{{messager.message.title}}</strong> <br><span>{{messager.message.text}}</span>
+      </div>
+      <!-- Messages -->
+    </div>
+  </div>
+
+</div>
+
+<div class="modal fade" id="addSchemeModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Добавление схемы</h5>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="" class="form-label">Аккаунт для оплат</label>
+          <input [(ngModel)]="selectedSchemes.account_number" type="text" class="form-control form-purple" id="" placeholder="154" onkeypress="return isNumberKey(event)"/>
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Название схемы</label>
+          <input [(ngModel)]="selectedSchemes.name" name="name" type="text" class="form-control form-purple" placeholder="Введите название">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Отменить</button>
+        <button (click)="createSchema()" type="button" class="btn btn-primary button-purple">Добавить</button>
+      </div>
+      <!-- Messages -->
+      <div *ngIf="message_id == 'schema-message'" class="{{messager.message.status}} {{messager.message.type}} md-3 mx-5 my-4 my-sm-3 my-lg-4 alert alert-dismissible fade">
+        <strong>{{messager.message.title}}</strong> <br><span>{{messager.message.text}}</span>
+      </div>
+      <!-- Messages -->
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="addUserModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Добавление пользователя</h5>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="" class="form-label">Имя пользователя</label>
+          <input [(ngModel)]="selectedUser.username" name="name" type="text" class="form-control form-purple" placeholder="Введите имя">
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">E-mail пользователя</label>
+          <input [(ngModel)]="selectedUser.email" type="email" class="form-control form-purple" placeholder="Введите e-mail">
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Имя в XERO</label>
+          <input [(ngModel)]="selectedUser.name_in_xero" type="text" class="form-control form-purple" placeholder="Введите имя этого пользователя в XERO">
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Разрешенные IP, разделенные запятой</label>
+          <input [(ngModel)]="addresses" type="text" class="form-control form-purple" placeholder="Введите IP пользователя">
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Роль пользователя</label>
+          <select [(ngModel)]="selectedUser.role" name="roles" class="form-select form-purple" aria-label="Роль пользователя">
+            <option selected>Выберете роль из списка</option>
+            <option value="Администратор">Администратор</option>
+            <option value="Главный скуп-сервис">Главный скуп-сервис</option>
+            <option value="Скуп-сервис">Скуп-сервис</option>
+            <option value="Бухгалтер">Бухгалтер</option>
+            <option value="Доверенный пользователь">Доверенный пользователь</option>
+            <option value="Пользователь">Пользователь</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Отменить</button>
+        <button (click)="addNewUser()" type="button" class="btn btn-primary button-purple">Добавить</button>
+      </div>
+      <!-- Messages -->
+      <div *ngIf="message_id == 'user-message'" class="{{messager.message.status}} {{messager.message.type}} md-3 mx-5 my-4 my-sm-3 my-lg-4 alert alert-dismissible fade">
+        <strong>{{messager.message.title}}</strong> <br><span>{{messager.message.text}}</span>
+      </div>
+      <!-- Messages -->
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="editUserModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Редактор пользователя</h5>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="" class="form-label">Имя в XERO</label>
+          <input [(ngModel)]="selectedUser.name_in_xero" value="{{selectedUser.name_in_xero}}" type="text" class="form-control form-purple" placeholder="Введите имя этого пользователя в XERO" >
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Разрешенные IP, разделенные запятой</label>
+          <input [(ngModel)]="addresses" value="{{addresses? addresses: selectedUser.ip_address[0].address}}" type="text" class="form-control form-purple" placeholder="Введите IP пользователя" >
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Роль пользователя</label>
+          <select [(ngModel)]="selectedUser.role" class="form-select form-purple" aria-label="Роль пользователя">
+            <option value="1" selected>Выберете роль из списка</option>
+            <option value="Администратор">Администратор</option>
+            <option value="Главный скуп-сервис">Главный скуп-сервис</option>
+            <option value="Скуп-сервис">Скуп-сервис</option>
+            <option value="Бухгалтер">Бухгалтер</option>
+            <option value="Доверенный пользователь">Доверенный пользователь</option>
+            <option value="Пользователь">Пользователь</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Отменить</button>
+        <button (click)="editUser()" type="button" class="btn btn-primary button-purple">Изменить</button>
+      </div>
+      <!-- Messages -->
+      <div *ngIf="message_id == 'user-edit-message'" class="{{messager.message.status}} {{messager.message.type}} md-3 mx-5 my-4 my-sm-3 my-lg-4 alert alert-dismissible fade">
+        <strong>{{messager.message.title}}</strong> <br><span>{{messager.message.text}}</span>
+      </div>
+      <!-- Messages -->
+      </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+      return false;
+    return true;
+  }
+</script>
+
+
+<style type="text/css">#hellopreloader>p{display:none;}#hellopreloader_preload{display: block;position: fixed;z-index: 99999;top: 0;left: 0;width: 100%;height: 100%;min-width: 1000px;background: #1E1E30 url(http://hello-site.ru//main/images/preloads/puff.svg) center center no-repeat;background-size:140px;}</style>
+<div id="hellopreloader">
+  <div id="hellopreloader_preload">
+  </div>
+</div>

@@ -1,0 +1,220 @@
+<div class="container nav-top">
+  <div class="row">
+    <nav class="navbar navbar-light bg-purple">
+      <div class="container-fluid">
+        <h1><a href="/home" class="back-main-icons">Провести оплату</a></h1>
+        <ul class="nav nav-our-control justify-content-end">
+          <li class="nav-item">
+            <a class="nav-link disabled" aria-current="page" href="#">{{currentUser.userName? currentUser.userName: currentUser.email}}</a>
+          </li>
+          <li class="nav-item">
+            <a (click)="toSettings()" class="nav-link"><span class="material-icons">settings</span></a>
+          </li>
+          <li class="nav-item">
+            <a (click)="LogOut()" class="nav-link"><span class="material-icons">logout</span></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<div class="container nav-bread">
+  <div class="row">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/home">Дэшборд</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Неподтвержденные оплаты</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
+<div class="container balcols">
+  <div class="row">
+    <h5 class="outofrow-h5">Суммы оплат и балансы</h5>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-bal-margins">
+      <div class="card h-100 card-body-balbg bal-card-control">
+        <div class="card-body">
+          <h5 class="card-title">Webmoney</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Z532837899512</h6>
+          <ol class="list-group list-group-numbered list-group-numbered-bal-fin-con">
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+              <div class="ms-2 me-auto">
+                <div class="fw-bold">Баланс</div>
+                Общая сумма денег на кошельке
+              </div>
+              <span class="badge list-group-numbered-bal-fin-con-pill-bg-main rounded-pill">34 932.44$</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+              <div class="ms-2 me-auto">
+                <div class="fw-bold">Модерация</div>
+                Сумма транзакций ожидающих подтверждения администрацией
+              </div>
+              <span class="badge list-group-numbered-bal-fin-con-pill-bg-main rounded-pill">9 032.89$</span>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-bal-margins">
+      <div class="card h-100 card-body-balbg bal-card-control">
+        <div class="card-body">
+          <h5 class="card-title">Bitcoin 1</h5>
+          <h6 class="card-subtitle mb-2 text-muted">33zCKy7KkByZW3w2g8Lm1i55VgBN8KSd5J</h6>
+          <ol class="list-group list-group-numbered list-group-numbered-bal-fin-con">
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+              <div class="ms-2 me-auto">
+                <div class="fw-bold">Баланс</div>
+                Общая сумма денег на кошельке
+              </div>
+              <span class="badge list-group-numbered-bal-fin-con-pill-bg-main rounded-pill">34 932.44$</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+              <div class="ms-2 me-auto">
+                <div class="fw-bold">Модерация</div>
+                Сумма транзакций ожидающих подтверждения администрацией
+              </div>
+              <span class="badge list-group-numbered-bal-fin-con-pill-bg-main rounded-pill">9 032.89$</span>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-bal-margins">
+      <div class="card h-100 card-body-balbg bal-card-control">
+        <div class="card-body">
+          <h5 class="card-title">Bitcoin 2</h5>
+          <h6 class="card-subtitle mb-2 text-muted">44zCKy7KkByZW3w2g8Lm1i55VgBN8KSd5J</h6>
+          <ol class="list-group list-group-numbered list-group-numbered-bal-fin-con">
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+              <div class="ms-2 me-auto">
+                <div class="fw-bold">Баланс</div>
+                Общая сумма денег на кошельке
+              </div>
+              <span class="badge list-group-numbered-bal-fin-con-pill-bg-main rounded-pill">34 932.44$</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+              <div class="ms-2 me-auto">
+                <div class="fw-bold">Модерация</div>
+                Сумма транзакций ожидающих подтверждения администрацией
+              </div>
+              <span class="badge list-group-numbered-bal-fin-con-pill-bg-main rounded-pill">9 032.89$</span>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="container admin-tables">
+  <div class="row">
+
+    <div class="col-12 col-adm-margins">
+      <div class="row align-items-end row-table-titles">
+        <div class="col-12"><h5>Список неподтвержденных оплат</h5></div>
+      </div>
+      <div class="one-table-amd-mobility">
+        <div class="table-responsive">
+          <table class="table align-middle table-adm-control table-scoop-control">
+            <thead>
+            <tr>
+              <th scope="col">Дата <span class="material-icons material-icons-outtable">filter_list</span></th>
+              <th scope="col">Время <span class="material-icons material-icons-outtable">filter_list</span></th>
+              <th scope="col">Кто <span class="material-icons material-icons-outtable">filter_list</span></th>
+              <th scope="col">Кому <span class="material-icons material-icons-outtable">filter_list</span></th>
+              <th scope="col">Способ <span class="material-icons material-icons-outtable">filter_list</span></th>
+              <th scope="col">Реквизиты <span class="material-icons material-icons-outtable">filter_list</span></th>
+              <th scope="col table-scoop-control-bigoneline">Описание <span class="material-icons material-icons-outtable">filter_list</span></th>
+              <th scope="col">Сумма <span class="material-icons material-icons-outtable">filter_list</span></th>
+              <th scope="col">Сумма рл. <span class="material-icons material-icons-outtable">filter_list</span></th>
+              <th scope="col">Схема <span class="material-icons material-icons-outtable">filter_list</span></th>
+              <th scope="col table-scoop-control-bigoneline">Hash <span class="material-icons material-icons-outtable">filter_list</span></th>
+              <th scope="col">Решение</th>
+              <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <th scope="row">2021.02.26</th>
+              <td>14:25:20</td>
+              <td>svd6969</td>
+              <td>zeratul</td>
+              <td>Webmoney</td>
+              <td>Z872104080752</td>
+              <td class="table-scoop-control-bigoneline">Lorem Ipsum is simply dummy text of the printing and typesetting industry</td>
+              <td>4948.78$</td>
+              <td>5208.13$</td>
+              <td>Основная</td>
+              <td class="table-scoop-control-bigoneline">Top-up from PayMaster24.Payouts, # 1479584, date 26/02/2021 (Payment from G2A.COM Ltd)</td>
+              <td><button class="btn btn-outline-info" type="button" data-bs-toggle="modal" data-bs-target="#confTransModal">Утвердить</button></td>
+              <td><button type="button" class="btn btn-primary button-purple" data-bs-toggle="modal" data-bs-target="#delTransModal">Отклонить</button></td>
+            </tr>
+            <tr>
+              <th scope="row">2021.02.26</th>
+              <td>14:25:20</td>
+              <td>svd6969</td>
+              <td>zeratul</td>
+              <td>Webmoney</td>
+              <td>Z872104080752</td>
+              <td class="table-scoop-control-bigoneline">Lorem Ipsum is simply dummy text of the printing and typesetting industry</td>
+              <td>4948.78$</td>
+              <td>5208.13$</td>
+              <td>Основная</td>
+              <td class="table-scoop-control-bigoneline">Top-up from PayMaster24.Payouts, # 1479584, date 26/02/2021 (Payment from G2A.COM Ltd)</td>
+              <td><button class="btn btn-outline-info" type="button" data-bs-toggle="modal" data-bs-target="#confTransModal">Утвердить</button></td>
+              <td><button type="button" class="btn btn-primary button-purple" data-bs-toggle="modal" data-bs-target="#delTransModal">Отклонить</button></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal fade" id="delTransModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Отклонить транзакцию</h5>
+      </div>
+      <div class="modal-body">
+        <p>Вы действительно хотите отклонить эту оплату?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Еще нет</button>
+        <button type="button" class="btn btn-primary button-purple">Да, отклонить</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="confTransModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Подтвердить оплату</h5>
+      </div>
+      <div class="modal-body">
+        <p>Вы действительно хотите подтвердить эту оплату? Деньги спишутся с кошелька незамедлительно и их нельзя будет вернуть.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Еще нет</button>
+        <button type="button" class="btn btn-primary button-purple">Да, оплатить</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<style type="text/css">#hellopreloader>p{display:none;}#hellopreloader_preload{display: block;position: fixed;z-index: 99999;top: 0;left: 0;width: 100%;height: 100%;min-width: 1000px;background: #1E1E30 url(http://hello-site.ru//main/images/preloads/puff.svg) center center no-repeat;background-size:140px;}</style>
+<div id="hellopreloader">
+  <div id="hellopreloader_preload">
+  </div>
+</div>

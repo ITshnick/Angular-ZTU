@@ -1,0 +1,103 @@
+<div class="container nav-top">
+  <div class="row">
+    <nav class="navbar navbar-light bg-purple">
+      <div class="container-fluid">
+        <h1><a href="/home" class="back-main-icons">Настройки</a></h1>
+        <ul class="nav nav-our-control justify-content-end">
+          <li class="nav-item">
+            <a id="user-name" class="nav-link disabled" aria-current="page" href="#">{{currentUser.userName? currentUser.userName: currentUser.email}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active"><span class="material-icons">settings</span></a>
+          </li>
+          <li id="logout" class="nav-item">
+            <a (click)="LogOut()" class="nav-link"><span class="material-icons">logout</span></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<div class="container nav-bread">
+  <div class="row">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/home">Дэшборд</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Настройки</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+
+<div class="container content-margins">
+  <div class="row">
+    <div class="card settingscard">
+      <div class="card-header">
+        <h4 class="settings-title">Редактирование профиля</h4>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title settings-subtitle">User ID & Telegram ID</h5>
+        <!--<p class="card-text settings-desc">Описание, если нужно.</p>-->
+        <div class="row g-2">
+          <div class="col-md">
+            <label for="formGroupExampleInput" class="form-label">User ID</label>
+            <div class="input-group input-group-lg">
+              <input [(ngModel)]="name" value="{{currentUser.userName}}" name="name" id="input-user-name" type="text" class="form-control form-purple" placeholder="Имя пользователя" aria-label="ProfileName" aria-describedby="basic-addon1">
+            </div>
+          </div>
+          <div class="col-md">
+            <label for="formGroupExampleInput" class="form-label">Telegram ID</label>
+            <div class="input-group input-group-lg">
+              <input [(ngModel)]="currentUser.telegram_id" value="{{currentUser.telegram_id}}" name="telegram_id" id="input-telegram-id" type="text" class="form-control form-purple" placeholder="Telegram ID" aria-label="TelegramID" aria-describedby="basic-addon1">
+            </div>
+          </div>
+        </div>
+        <div class="separator"></div>
+        <h5 class="card-title settings-subtitle">Смена пароля</h5>
+        <!--<p class="card-text settings-desc">Описание, если нужно.</p>-->
+        <div class="row g-2">
+          <div class="col-md">
+            <label for="formGroupExampleInput" class="form-label">Новый пароль</label>
+            <div class="input-group input-group-lg">
+              <input [(ngModel)]="currentUser.firstPass" name="firstPass" id="input-password" type="text" class="form-control form-purple" placeholder="Пароль" aria-label="ProfileName" aria-describedby="basic-addon1">
+            </div>
+          </div>
+          <div class="col-md">
+            <label for="formGroupExampleInput" class="form-label">Повторить новый пароль</label>
+            <div class="input-group input-group-lg">
+              <input [(ngModel)]="currentUser.secondPass" name="secondPass" id="input-second-password" type="text" class="form-control form-purple" placeholder="Пароль" aria-label="TelegramID" aria-describedby="basic-addon1">
+            </div>
+          </div>
+        </div>
+        <div class="separator"></div>
+
+        <!-- Messages -->
+        <div class="{{messager.message.status}} {{messager.message.type}} md-3 alert alert-dismissible fade">
+          <strong id="message-type">{{messager.message.title}}</strong> <br><span id="message-text">{{messager.message.text}}</span>
+        </div>
+        <!-- Messages -->
+
+        <h5 class="card-title settings-subtitle">Сохранение настроек</h5>
+        <p class="card-text settings-desc">Подтвердите изменения.</p>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <!--
+          <label for="formGroupExampleInput" class="form-label">Актуальный пароль</label>
+          -->
+          <div class="input-group input-group-lg">
+            <!--
+            <input type="text" class="form-control form-purple" placeholder="Пароль" aria-label="TelegramID" aria-describedby="basic-addon1">
+            -->
+            <button (click)="SendPatch()" id="submit" type="button" class="btn btn-primary button-purple">Сохранить</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style type="text/css">#hellopreloader>p{display:none;}#hellopreloader_preload{display: block;position: fixed;z-index: 99999;top: 0;left: 0;width: 100%;height: 100%;min-width: 1000px;background: #1E1E30 url(http://hello-site.ru//main/images/preloads/puff.svg) center center no-repeat;background-size:140px;}</style>
+<div id="hellopreloader">
+  <div id="hellopreloader_preload">
+  </div>
+</div>

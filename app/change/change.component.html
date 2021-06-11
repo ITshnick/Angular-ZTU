@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="card logincard">
+      <div class="card-header">
+        <h4 class="login-title">Изменить пароль</h4>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Новый пароль</label>
+            <input [(ngModel)]="firstPass" name="fristPass" type="password" class="form-control form-purple" id="input-password" required>
+            <div id="emailHelp" class="form-text">Пароль должен состоять из 8-20 символов, содержать буквы и цифры и не должен содержать пробелов, специальных символов или эмодзи.</div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Повтори новый пароль</label>
+            <input [(ngModel)]="secondPass" name="secondPass" type="password" class="form-control form-purple" id="input-second-password" required>
+            <div id="emailHelp" class="form-text">Введи свой новый пароль еще раз.</div>
+          </div>
+
+          <!-- Messages -->
+          <div class="{{messager.message.status}} {{messager.message.type}} md-3 alert alert-dismissible fade">
+            <strong id="message-type">{{messager.message.title}}</strong> <br><span id="message-text">{{messager.message.text}}</span> 
+          </div>
+          <!-- Messages -->
+          <button (click)="SendNewPass()" type="button" class="btn btn-primary button-purple">Изменить</button>
+          <a id="back" class="a-recovery">Отменить &#8250;</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style type="text/css">#hellopreloader>p{display:none;}#hellopreloader_preload{display: block;position: fixed;z-index: 99999;top: 0;left: 0;width: 100%;height: 100%;min-width: 1000px;background: #1E1E30 url(http://hello-site.ru//main/images/preloads/puff.svg) center center no-repeat;background-size:140px;}</style>
+<div id="hellopreloader">
+  <div id="hellopreloader_preload">
+    
+    <div *ngIf="isError">
+      <div id="error-box" class=" {{messager.message.status}} {{messager.message.type}} mx-5 my-4 my-sm-3 my-lg-4 alert" role="alert">
+        <h4 id="type-message" class="alert-heading">{{messager.message.title}}</h4>
+        <p id="error-message">{{messager.message.text}}</p>
+        <hr>
+        <p id="second-error-message" class="mb-0">Переадресация через {{timer}}</p>
+      </div>
+    </div>
+    
+  </div>
+</div>

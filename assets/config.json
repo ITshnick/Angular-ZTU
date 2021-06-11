@@ -1,0 +1,35 @@
+{
+    "domen": "http://34.122.2.173",
+
+    "request":
+    {
+      "login": "http://34.122.2.173:8000/api_v1/auth/login/",
+      "token": "http://34.122.2.173:8000/api_v1/auth/check/",
+      "restore":{
+        "send": "http://34.122.2.173:8000/api_v1/auth/restore/send/",
+        "verify": "http://34.122.2.173:8000/api_v1/auth/restore/verify/"
+      },
+      "user": "http://34.122.2.173:8000/api_v1/user/",
+      "admins":{
+        "users": "http://34.122.2.173:8000/api_v1/admins/users/",
+        "schemes": "http://34.122.2.173:8000/api_v1/admins/schemes/",
+        "settings": {
+          "time": "http://34.122.2.173:8000/api_v1/settings/time/schedule/"
+        },
+        "contacts": "http://34.122.2.173:8000/api_v1/xero/contacts/salary/"
+      },
+      "byuService": "http://34.122.2.173:8000/api_v1/xero/contacts/invoice/",
+      "xero": "http://34.122.2.173:8000/api_v1/settings/text/xero/"
+    },
+    "routes":{
+      "login": "/",
+      "main": "/home",
+      "settings": "/settings",
+      "recover": "/recover",
+      "change": "/change",
+      "admin": "/admin",
+      "buyup": "/buyup",
+      "token": "/token",
+      "payment": "/payment"
+    }
+}
